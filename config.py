@@ -112,15 +112,15 @@ class PluginConfig(ConfigNode):
         return [target_id for target_id in ids if target_id not in disabled]
 
     def enable_target(self, target_id: str, is_group: bool = True):
-        disabled = self.disabled_list(is_group)
-        if target_id in disabled:
-            disabled.remove(target_id)
+        enabled = self.enabled_list(is_group)
+        if target_id in enabled:
+            enabled.remove(target_id)
             self.save_config()
 
 
     def disable_target(self, target_id: str, is_group: bool = True):
-        disabled = self.disabled_list(is_group)
-        if target_id not in disabled:
-            disabled.append(target_id)
+        enabled = self.enabled_list(is_group)
+        if target_id not in enabled:
+            enabled.append(target_id)
             self.save_config()
             return True

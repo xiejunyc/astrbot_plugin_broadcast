@@ -89,8 +89,8 @@ class ConfigNode:
 class PluginConfig(ConfigNode):
     broadcast_max_delay: float
     skip_source: bool
-    disable_gids: list[str]
-    disable_uids: list[str]
+    enable_gids: list[str]
+    enable_uids: list[str]
 
     def __init__(self, cfg: AstrBotConfig, context: Context | None = None):
         super().__init__(cfg)
@@ -101,8 +101,8 @@ class PluginConfig(ConfigNode):
 
     def enabled_list(self, is_group: bool = True) -> list[str]:
         if is_group:
-            return self.disable_gids
-        return self.disable_uids
+            return self.enable_gids
+        return self.enable_uids
 
     def is_enabled(self, target_id: str, is_group: bool = True) -> bool:
         return target_id in self.enabled_list(is_group)

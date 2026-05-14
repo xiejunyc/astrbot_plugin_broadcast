@@ -113,14 +113,14 @@ class PluginConfig(ConfigNode):
 
     def enable_target(self, target_id: str, is_group: bool = True):
         enabled = self.enabled_list(is_group)
-        if target_id in enabled:
-            enabled.remove(target_id)
-            self.save_config()
-
-
-    def disable_target(self, target_id: str, is_group: bool = True):
-        enabled = self.enabled_list(is_group)
         if target_id not in enabled:
             enabled.append(target_id)
             self.save_config()
             return True
+
+    def disable_target(self, target_id: str, is_group: bool = True):
+        enabled = self.enabled_list(is_group)
+        if target_id in enabled:
+            enabled.remove(target_id)
+            self.save_config()
+            

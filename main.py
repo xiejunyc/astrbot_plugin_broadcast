@@ -46,9 +46,12 @@ class BroadcastPlugin(Star):
         if not target_id:
             return
 
-        self.cfg.enable_target(target_id, is_group=is_group)
         scope_name = "群聊" if is_group else "私聊"
-        yield event.plain_result(f"【{name}】已开启{scope_name}广播")
+        enable_target_isok = self.cfg.enable_target(target_id, is_group=is_group)
+        if enable_target_isok:
+            yield event.plain_result(f"【{name}】开启{scope_name}广播成功！")
+        else:
+            yield event.plain_result(f"【{name}】已在{scope_name}广播列表！")
 
     @filter.command("关闭广播")
     async def disable_broadcast(
@@ -72,8 +75,11 @@ class BroadcastPlugin(Star):
         if not target_id:
             return
 
-        self.cfg.disable_target(target_id, is_group=is_group)
-        yield event.plain_result(f"已关闭【{name}】的{scope_text}广播")
+        disable_target_isok = self.cfg.disable_target(target_id, is_group=is_group)
+        if disable_target_isok:
+            yield event.plain_result(f"【{name}】关闭{scope_text}广播成功！")
+        else:
+            yield event.plain_result(f"【{name}】未在{scope_text}广播列表！")
 
     @filter.permission_type(filter.PermissionType.ADMIN)
     @filter.command("广播列表")

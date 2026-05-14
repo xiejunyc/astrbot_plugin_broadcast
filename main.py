@@ -35,6 +35,7 @@ class BroadcastPlugin(Star):
     ):
         """开启广播 <留空|群聊|私聊> <序号>"""
         is_group, index, err = parse_scope_and_index(arg1, arg2)
+        
         if err:
             yield event.plain_result(err)
             return
@@ -62,7 +63,6 @@ class BroadcastPlugin(Star):
     ):
         """关闭广播 <留空|群聊|私聊> <序号>"""
         is_group, index, err = parse_scope_and_index(arg1, arg2)
-        scope_text = "群聊" if is_group else "好友"
 
         if err:
             yield event.plain_result(err)
@@ -75,6 +75,7 @@ class BroadcastPlugin(Star):
         if not target_id:
             return
 
+        scope_text = "群聊" if is_group else "好友"
         disable_target_isok = self.cfg.disable_target(target_id, is_group=is_group)
         if disable_target_isok:
             yield event.plain_result(f"【{name}】关闭{scope_text}广播成功！")

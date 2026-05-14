@@ -99,13 +99,13 @@ class PluginConfig(ConfigNode):
     def get_broadcast_delay(self):
         return random.uniform(0, self.broadcast_max_delay)
 
-    def disabled_list(self, is_group: bool = True) -> list[str]:
+    def enabled_list(self, is_group: bool = True) -> list[str]:
         if is_group:
             return self.disable_gids
         return self.disable_uids
 
     def is_enabled(self, target_id: str, is_group: bool = True) -> bool:
-        return target_id in self.disabled_list(is_group)
+        return target_id in self.enabled_list(is_group)
 
     def filter_broadcastable(self, ids: list[str], is_group: bool = True) -> list[str]:
         disabled = self.disabled_list(is_group)

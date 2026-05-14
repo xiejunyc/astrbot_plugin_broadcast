@@ -83,7 +83,6 @@ class BroadcastPlugin(Star):
         scope_text = "群聊" if is_group else "好友"
 
         enabled = []
-        disabled = []
 
         if is_group:
             groups = await event.bot.get_group_list()

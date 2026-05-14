@@ -91,9 +91,7 @@ class BroadcastPlugin(Star):
             for idx, g in enumerate(groups, 1):
                 target_id = str(g["group_id"])
                 info = f"{idx}. {g['group_name']} ({target_id})"
-                if self.cfg.is_disabled(target_id, is_group=True):
-                    disabled.append(info)
-                else:
+                if self.cfg.is_enabled(target_id, is_group=True):
                     enabled.append(info)
         else:
             friends = await event.bot.get_friend_list()
@@ -102,14 +100,10 @@ class BroadcastPlugin(Star):
                 target_id = str(f["user_id"])
                 name = f.get("remark") or f.get("nickname") or target_id
                 info = f"{idx}. {name} ({target_id})"
-                if self.cfg.is_disabled(target_id, is_group=False):
-                    disabled.append(info)
-                else:
+                if self.cfg.is_enabled(target_id, is_group=False):
                     enabled.append(info)
 
         msg = f"【{scope_text}开启广播】\n" + "\n".join(enabled)
-        if len(disabled) > 0:
-            msg += f"\n\n【{scope_text}关闭广播】\n" + "\n".join(disabled)
 
         yield event.plain_result(msg)
 

@@ -90,6 +90,7 @@ class BroadcastPlugin(Star):
         scope_text = "群聊" if is_group else "好友"
 
         enabled = []
+        disabled = []
 
         if is_group:
             groups = await event.bot.get_group_list()
@@ -99,6 +100,8 @@ class BroadcastPlugin(Star):
                 info = f"{idx}. {g['group_name']} ({target_id})"
                 if self.cfg.is_enabled(target_id, is_group=True):
                     enabled.append(info)
+                else:
+                    disabled.append(info)
         else:
             friends = await event.bot.get_friend_list()
             friends.sort(key=lambda x: x["user_id"])
@@ -108,8 +111,12 @@ class BroadcastPlugin(Star):
                 info = f"{idx}. {name} ({target_id})"
                 if self.cfg.is_enabled(target_id, is_group=False):
                     enabled.append(info)
+                else:
+                    disabled.append(info)
 
         msg = f"【{scope_text}开启广播】\n" + "\n".join(enabled)
+        if len(disabled) > 0:
+            msg += f"\n\n【{scope_text}关闭广播】\n" + "\n".join(disabled)
 
         yield event.plain_result(msg)
 

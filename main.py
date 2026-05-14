@@ -124,7 +124,6 @@ class BroadcastPlugin(Star):
     @filter.command("广播")
     async def cmd_broadcast(self, event: AiocqhttpMessageEvent, scope_name: str = ""):
         """(引用消息)广播 <群聊|私聊|全部>"""
-        yield event.plain_result("test1")
         reply_id = get_reply_id(event)
         if not reply_id:
             yield event.plain_result("需要引用要广播的消息")
@@ -136,7 +135,6 @@ class BroadcastPlugin(Star):
 
         is_group = bool(parse_scope_name(scope_name))
         scope_text = "群聊" if is_group else "好友"
-        yield event.plain_result("test2")
 
         ids = await get_ids(client=event.bot, is_group=is_group)
 

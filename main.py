@@ -26,6 +26,7 @@ class BroadcastPlugin(Star):
         self.cfg = PluginConfig(config)
         self._broadcast_task = None
 
+    @filter.permission_type(filter.PermissionType.ADMIN)
     @filter.command("开启广播")
     async def enable_broadcast(
         self,
@@ -54,6 +55,7 @@ class BroadcastPlugin(Star):
         else:
             yield event.plain_result(f"【{name}】已在{scope_name}广播列表！")
 
+    @filter.permission_type(filter.PermissionType.ADMIN)
     @filter.command("关闭广播")
     async def disable_broadcast(
         self,

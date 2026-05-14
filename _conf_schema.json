@@ -16,16 +16,16 @@
         "hint": "发送广播命令时，是否跳过当前群聊/私聊，避免在源头会话重复发送广播消息",
         "default": true
     },
-    "disable_gids": {
-        "description": "关闭广播的群聊",
+    "enable_gids": {
+        "description": "开启广播的群聊",
         "type": "list",
-        "hint": "关闭广播的群聊将不再接收广播消息",
+        "hint": "只有此列表内的群聊才会收到广播消息",
         "default": []
     },
-    "disable_uids": {
-        "description": "关闭私聊广播的好友",
+    "enable_uids": {
+        "description": "开启私聊广播的好友",
         "type": "list",
-        "hint": "被禁用的好友将不会收到私聊广播",
+        "hint": "只有此列表内的好友才会收到私聊广播",
         "default": []
     }
 }

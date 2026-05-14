@@ -108,8 +108,7 @@ class PluginConfig(ConfigNode):
         return target_id in self.enabled_list(is_group)
 
     def filter_broadcastable(self, ids: list[str], is_group: bool = True) -> list[str]:
-        disabled = self.disabled_list(is_group)
-        return [target_id for target_id in ids if target_id not in disabled]
+        return self.disabled_list(is_group)
 
     def enable_target(self, target_id: str, is_group: bool = True):
         enabled = self.enabled_list(is_group)

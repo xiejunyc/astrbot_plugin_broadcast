@@ -104,7 +104,7 @@ class PluginConfig(ConfigNode):
             return self.disable_gids
         return self.disable_uids
 
-    def is_disabled(self, target_id: str, is_group: bool = True) -> bool:
+    def is_enabled(self, target_id: str, is_group: bool = True) -> bool:
         return target_id in self.disabled_list(is_group)
 
     def filter_broadcastable(self, ids: list[str], is_group: bool = True) -> list[str]:
